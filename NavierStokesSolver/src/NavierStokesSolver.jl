@@ -7,7 +7,7 @@ include("rk4.jl")
 include("pressure.jl")
 include("boundary.jl")
 include("diagnostic.jl")
-include("vizualization.jl")
+include("visualization.jl")
 
 export navier_stokes_solver, animate_flow
 
