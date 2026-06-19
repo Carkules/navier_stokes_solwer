@@ -17,7 +17,7 @@ Równanie rozwiązywane w formie bezwymiarowej:
 
 $$\frac{\partial \vec{v}}{\partial t} + (\vec{v} \cdot \nabla)\vec{v} = -\nabla p + \frac{1}{Re} \Delta \vec{v}$$
 
-## Struktura projektu
+## Struktura pakietu
 
 - NavierStokesSolver
     - src
@@ -70,16 +70,6 @@ v_x_hist, v_y_hist, p_hist = navier_stokes_solver(
 )
 ```
 
-### Animacja
-
-```julia
-x = range(0, 1, length=20)
-y = range(0, 1, length=20)
-
-animate_flow(x, y, v_x_hist, v_y_hist, p_hist;
-    fps=20, title="flow.gif")
-```
-
 ## Warunki brzegowe
 
 Wlot (lewa ściana): płyn wpływa z prędkością bezwymiarową `v_x = 1`, `v_y = 0`, ciśnienie ustala się samo.
@@ -96,11 +86,16 @@ Funkcja `navier_stokes_solver` zwraca historię symulacji jako trzy wektory maci
 - `v_y_hist` — historia prędkości pionowej, rozmiar `(nx, ny+1)`
 - `p_hist` — historia ciśnienia, rozmiar `(nx, ny)`
 
-Funkcja `animate_flow` tworzy plik o rozszerzeniu .gif zawierający animację przepływu.
+## Animacja
+Do tworzenia animacji z otrzymanych wyników służy funkckcja `animate_flow`. Tworzy ona plik o rozszerzeniu .gif zawierający animację przepływu.
 
-## Wymagane pakiety
+```julia
+animate_flow(v_x_hist, v_y_hist, p_hist, 1.0;
+    fps=20, title="flow.gif")
+```
 
-- Julia 1.12+ (pakiet LinearAlgebra)
+## Wymagania
+- Julia 1.12+
 - GLMakie 0.13.11
 
 

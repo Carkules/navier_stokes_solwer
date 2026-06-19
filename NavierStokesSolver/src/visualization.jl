@@ -1,6 +1,37 @@
+"""
+    animate_flow(v_x_hist, v_y_hist, p_hist, L; fps=20, title="flow.gif")
+
+Tworzy i zapisuje animację w formacie `.gif`, przedstawiającą ewolucję czasową dwuwymiarowego przepływu płynu.
+
+Wizualizacja składa się z dwóch nałożonych na siebie warstw:
+1. Mapy ciepła (`heatmap`) reprezentującej dynamiczne zmiany pola ciśnienia.
+2. Pola wektorowego (`arrows`) obrazującego kierunek, zwrot oraz relatywną prędkość przepływu płynu.
+
+# Argumenty pozycyjne (Positional Arguments)
+- `v_x_hist::Vector{<:Matrix}`: Historia rozkładu prędkości poziomej w kolejnych krokach czasowych.
+- `v_y_hist::Vector{<:Matrix}`: Historia rozkładu prędkości pionowej w kolejnych krokach czasowych.
+- `p_hist::Vector{<:Matrix}`: Historia rozkładu pola ciśnienia w kolejnych krokach czasowych. Na podstawie pierwszego kroku automatycznie określany jest rozmiar siatki obliczeniowej (`nx`, `ny`).
+- `L::Real`: Długość boku kwadratowego kanału.
+
+# Argumenty nazwane (Keyword Arguments)
+- `fps::Int`: Liczba klatek na sekundę generowanej animacji GIF (domyślnie: `20`).
+- `title::String`: Nazwa lub ścieżka pliku wynikowego wraz z rozszerzeniem `.gif` (domyślnie: `"flow.gif"`).
+
+# Algorytm i przetwarzanie danych
+- Interpolacja do środków komórek (`to_center`): Funkcja wewnętrznie uśrednia wartości prędkości z krawędzi komórek na ich środki.
+- Skalowanie wektorów (`prep`): Długości strzałek są normalizowane względem maksymalnej prędkości w danym kroku i mnożone przez stały współczynnik (`scale = 0.05`), co zapobiega ich nachodzeniu na siebie i zapewnia czytelność wykresu wektorowego.
+
+# Wymagania
+Funkcja wymaga pakietu `GLMakie`.
+
+# Przykład użycia
+```julia
+animate_flow(v_x_hist, v_y_hist, p_hist, 1.0; fps=60, title="przeplyw_rk4.gif")
+"""
+
 using GLMakie
 function animate_flow(v_x_hist, v_y_hist, p_hist, L; fps=20, title="flow.gif")
-    
+
     nx, ny = size(p_hist[1])
     x = range(0, L, length=nx)
     y = range(0, L, length=ny)
