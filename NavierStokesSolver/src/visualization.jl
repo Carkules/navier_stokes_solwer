@@ -1,7 +1,9 @@
 using GLMakie
-function animate_flow(x, y, v_x_hist, v_y_hist, p_hist; fps=20, title="flow.gif")
-    nx = length(x)
-    ny = length(y)
+function animate_flow(v_x_hist, v_y_hist, p_hist, L; fps=20, title="flow.gif")
+    
+    nx, ny = size(p_hist[1])
+    x = range(0, L, length=nx)
+    y = range(0, L, length=ny)
 
     fig = Figure()
     ax = Axis(fig[1, 1])
