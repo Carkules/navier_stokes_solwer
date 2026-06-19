@@ -90,6 +90,17 @@ Funkcja `navier_stokes_solver` zwraca historię symulacji jako trzy wektory maci
 Do tworzenia animacji z otrzymanych wyników służy funkckcja `animate_flow`. Tworzy ona plik o rozszerzeniu .gif zawierający animację przepływu.
 
 ```julia
+animate_flow(
+    v_x_hist, # Historia rozkładu prędkości poziomej w kolejnych krokach czasowych.
+    v_y_hist, # Historia rozkładu prędkości pionowej w kolejnych krokach czasowych.
+    p_hist,   # Historia rozkładu pola ciśnienia w kolejnych krokach czasowych.
+    L;        # Długość boku kwadratowego kanału.
+    fps=20,   # Liczba klatek na sekundę generowanej animacji GIF.
+    title="flow.gif")   # Nazwa lub ścieżka pliku wynikowego wraz z rozszerzeniem `.gif`.
+```
+Przykład użycia
+
+```julia
 animate_flow(v_x_hist, v_y_hist, p_hist, 1.0;
     fps=20, title="flow.gif")
 ```
