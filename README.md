@@ -15,7 +15,7 @@ Solver wykorzystuje metodę projekcyjną na siatce staggered MAC:
 
 Równanie rozwiązywane w formie bezwymiarowej:
 
-$$\frac{\partial \vec{v}^*}{\partial t^*} + (\vec{v}^* \cdot \nabla^*)\vec{v}^* = -\nabla^* p^* + \frac{1}{Re} \Delta^* \vec{v}^*$$
+$$\frac{\partial \vec{v}}{\partial t} + (\vec{v} \cdot \nabla)\vec{v} = -\nabla p + \frac{1}{Re} \Delta \vec{v}$$
 
 ## Struktura projektu
 
