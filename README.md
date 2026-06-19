@@ -34,11 +34,10 @@ $$\frac{\partial \vec{v}}{\partial t} + (\vec{v} \cdot \nabla)\vec{v} = -\nabla 
     - Manifest.toml
 
 ## Instalacja
-
+Żeby zainstalować pakiet NavierStokesSolver należy wykonać następujące kroki:
 ```julia
-using Pkg
-Pkg.activate(".")
-Pkg.instantiate()
+import Pkg
+Pkg.add(url="https://github.com/Carkules/navier_stokes_solwer", subdir="NavierStokesSolver")
 ```
 
 ## Użycie
@@ -91,12 +90,13 @@ Wylot (prawa ściana): swobodny wypływ — prędkości z wnętrza, ciśnienie r
 
 ## Zwracane wartości
 
-Funkcja zwraca historię symulacji jako trzy wektory macierzy:
+Funkcja `navier_stokes_solver` zwraca historię symulacji jako trzy wektory macierzy:
 
 - `v_x_hist` — historia prędkości poziomej, rozmiar każdej macierzy `(nx+1, ny)`
 - `v_y_hist` — historia prędkości pionowej, rozmiar `(nx, ny+1)`
 - `p_hist` — historia ciśnienia, rozmiar `(nx, ny)`
 
+Funkcja `animate_flow` tworzy plik o rozszerzeniu .gif zawierający animację przepływu.
 
 ## Wymagane pakiety
 
