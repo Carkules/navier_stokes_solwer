@@ -1,5 +1,5 @@
 # navier_stokes_solwer
-NavierStokesSolver zawiera zbiór plików opisujących zagadnienie numerycznej mechaniki płynów.
+NavierStokesSolver to pakiet funkcji napisany w języku Julia opisujący zagadnienie numerycznej mechaniki płynów.
 
 # NavierStokesSolver.jl
 
@@ -94,7 +94,7 @@ animate_flow(
     v_x_hist, # Historia rozkładu prędkości poziomej w kolejnych krokach czasowych.
     v_y_hist, # Historia rozkładu prędkości pionowej w kolejnych krokach czasowych.
     p_hist,   # Historia rozkładu pola ciśnienia w kolejnych krokach czasowych.
-    L;        # Długość boku kwadratowego kanału.
+    L;        # Długość boku kanału.
     fps=20,   # Liczba klatek na sekundę generowanej animacji GIF.
     title="flow.gif")   # Nazwa lub ścieżka pliku wynikowego wraz z rozszerzeniem `.gif`.
 ```
