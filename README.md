@@ -46,7 +46,7 @@ Pkg.add(url="https://github.com/Carkules/navier_stokes_solwer", subdir="NavierSt
 using NavierStokesSolver
 
 v_x_hist, v_y_hist, p_hist = navier_stokes_solver(
-    U,      # prędkość referencyjna [m/s]
+    U,      # prędkość wpływu do kanału [m/s]
     L,      # długość boku kanału [m]
     rho,    # gęstość płynu [kg/m³]
     miu,    # lepkość dynamiczna [Pa·s]

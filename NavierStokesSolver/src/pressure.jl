@@ -40,7 +40,7 @@ function projection!(v_x_prim, v_y_prim, v_x_start, v_y_start,
             v_x_start[i, j] - dt_prim * (p_prim[i, j] - p_prim[i-1, j]) / x_prim
     end
 
-    for i in 1:nx, j in 2:ny # Poprawiono z 1:ny na 1:nx
+    for i in 1:nx, j in 2:ny
         v_y_prim[i, j] =
             v_y_start[i, j] - dt_prim * (p_prim[i, j] - p_prim[i, j-1]) / y_prim
     end

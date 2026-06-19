@@ -2,7 +2,7 @@ function rk4_step!(v_x_prim, v_y_prim, v_x_start, v_y_start,
                    x_prim, y_prim, nx, ny, dt_prim, Re)
 
     function rhs_x(v_x, v_y)
-        f = zeros(nx + 1, ny) # Poprawiony rozmiar siatki x
+        f = zeros(nx + 1, ny)
         for i in 2:nx, j in 2:(ny-1)
             v_y_dim_x = 0.25 * (v_y[i-1, j] + v_y[i, j] + v_y[i-1, j+1] + v_y[i, j+1])
             du_dx = (v_x[i+1, j] - v_x[i-1, j]) / (2 * x_prim)
@@ -18,7 +18,7 @@ function rk4_step!(v_x_prim, v_y_prim, v_x_start, v_y_start,
     end
 
     function rhs_y(v_x, v_y)
-        f = zeros(nx, ny + 1) # Poprawiony rozmiar siatki y
+        f = zeros(nx, ny + 1)
         for i in 2:(nx-1), j in 2:ny
             v_x_dim_y = 0.25 * (v_x[i, j-1] + v_x[i+1, j-1] + v_x[i, j] + v_x[i+1, j])
             dv_dx = (v_y[i+1, j] - v_y[i-1, j]) / (2 * x_prim)
@@ -57,7 +57,6 @@ function rk4_step!(v_x_prim, v_y_prim, v_x_start, v_y_start,
     k4x = rhs_x(vx3, vy3)
     k4y = rhs_y(vx3, vy3)
 
-    # Składanie etapów RK4 dla wnętrza obszaru
     for i in 2:nx, j in 2:(ny-1)
         v_x_start[i, j] = v_x_prim[i, j] + (dt_prim / 6) * (k1x[i, j] + 2k2x[i, j] + 2k3x[i, j] + k4x[i, j])
     end

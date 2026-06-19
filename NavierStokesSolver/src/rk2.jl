@@ -2,7 +2,7 @@ function rk2_step!(v_x_prim, v_y_prim, v_x_start, v_y_start,
                    x_prim, y_prim, nx, ny, dt_prim, Re)
 
     function rhs_x(v_x, v_y)
-        f = zeros(nx + 1, ny) # Poprawiony rozmiar siatki x
+        f = zeros(nx + 1, ny)
         for i in 2:nx, j in 2:(ny-1)
             v_y_dim_x = 0.25 * (v_y[i-1, j] + v_y[i, j] + v_y[i-1, j+1] + v_y[i, j+1])
             du_dx = (v_x[i+1, j] - v_x[i-1, j]) / (2 * x_prim)
@@ -18,7 +18,7 @@ function rk2_step!(v_x_prim, v_y_prim, v_x_start, v_y_start,
     end
 
     function rhs_y(v_x, v_y)
-        f = zeros(nx, ny + 1) # Poprawiony rozmiar siatki y
+        f = zeros(nx, ny + 1)
         for i in 2:(nx-1), j in 2:ny
             v_x_dim_y = 0.25 * (v_x[i, j-1] + v_x[i+1, j-1] + v_x[i, j] + v_x[i+1, j])
             dv_dx = (v_y[i+1, j] - v_y[i-1, j]) / (2 * x_prim)
@@ -33,20 +33,16 @@ function rk2_step!(v_x_prim, v_y_prim, v_x_start, v_y_start,
         return f
     end
 
-    # k1
     k1x = rhs_x(v_x_prim, v_y_prim)
     k1y = rhs_y(v_x_prim, v_y_prim)
 
-    # Predyktor
     vx_temp = v_x_prim .+ dt_prim .* k1x
     vy_temp = v_y_prim .+ dt_prim .* k1y
     nalozenie_bc!(vx_temp, vy_temp) 
     
-    # k2
     k2x = rhs_x(vx_temp, vy_temp)
     k2y = rhs_y(vx_temp, vy_temp)
 
-    # Korektor (aktualizacja wnętrza)
     for i in 2:nx, j in 2:(ny-1)
         v_x_start[i, j] = v_x_prim[i, j] + (dt_prim / 2) * (k1x[i, j] + k2x[i, j])
     end
